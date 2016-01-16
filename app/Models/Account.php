@@ -320,12 +320,19 @@ class Account extends Eloquent
 
     public function hasLogo()
     {
-        return file_exists($this->getLogoPath());
+        return file_exists($this->getLogoPathFull());
     }
 
     public function getLogoPath()
     {
         $fileName = 'logo/' . $this->account_key;
+
+        return file_exists($fileName.'.png') ? $fileName.'.png' : $fileName.'.jpg';
+    }
+
+    public function getLogoPathFull()
+    {
+        $fileName = 'public/logo/' . $this->account_key;
 
         return file_exists($fileName.'.png') ? $fileName.'.png' : $fileName.'.jpg';
     }
